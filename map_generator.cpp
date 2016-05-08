@@ -5,7 +5,7 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Wed May  4 12:40:18 2016 Korial
-// Last update Sun May  8 02:00:55 2016 Korial
+// Last update Sun May  8 02:26:19 2016 Korial
 //
 
 #include "map_generator.hpp"
@@ -104,5 +104,7 @@ void	Map::draw_rooms(std::vector<std::string>& map, std::vector<Rooms>& rooms, S
 	    }
 	}
     }
+  map[(rooms[0]._size.y / 2) + rooms[0]._pos.y + 2][(rooms[0]._size.x / 2) + rooms[0]._pos.x + 2] = 'E';
+  map[(rooms[rooms.size() - 1]._size.y / 2) + rooms[rooms.size() - 1]._pos.y + 2][(rooms[rooms.size() - 1]._size.x / 2) + rooms[rooms.size() - 1]._pos.x + 2] = 'S';
 }
 
