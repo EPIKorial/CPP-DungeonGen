@@ -5,7 +5,7 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Mon May  2 20:14:23 2016 Korial
-// Last update Mon May  9 18:40:55 2016 Korial
+// Last update Mon May  9 19:13:02 2016 Korial
 //
 
 #ifndef MAP_GENERATOR_HPP_
@@ -30,7 +30,6 @@ private:
   std::vector<std::string>	_map;
   std::vector<Leaf>		_leafs;
   std::vector<Rooms>		_rooms;
-  std::vector<Hallways>		_hallways;
   
 public:
   Map() : room_nbr(1), map_size(Size(100, 100)), room_max_size(Size(10, 10)), room_min_size(Size(6, 6)), _seed(-1) { }
