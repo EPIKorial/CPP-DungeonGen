@@ -5,7 +5,7 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Sat May  7 13:02:21 2016 Korial
-// Last update Sat May  7 20:47:21 2016 Korial
+// Last update Mon May  9 15:08:06 2016 Korial
 //
 
 #include "mg_utils.hpp"
@@ -14,17 +14,16 @@ static int	ids = 0;
 
 int	random_range(int min, int max)
 {
-  srand(time(NULL));
   return (min + (rand() % (max - min + 1)));
 }
 
-void	Node::display_node_info() const
+void	Leaf::display_node_info() const
 {
-  std::cout << "Node pos : " << _pos.x << "/" << _pos.y << std::endl;
-  std::cout << "Node _size : " << _size.x << "/" << _size.y << std::endl;
+  std::cout << "Leaf pos : " << _pos.x << "/" << _pos.y << std::endl;
+  std::cout << "Leaf _size : " << _size.x << "/" << _size.y << std::endl;
 }
 
-bool	Node::split(Size roomMax, Size roomMin)
+bool	Leaf::split(Size roomMin)
 {
   bool	splitB;
 
@@ -40,18 +39,18 @@ bool	Node::split(Size roomMax, Size roomMin)
   int splitPos = random_range((splitB ? roomMin.y : roomMin.x), max);
   if (splitB)
     {
-      leftChild =  new Node(Size(_pos.x, _pos.y), Size(_size.x, splitPos));
-      rightChild =  new Node(Size(_pos.x, _pos.y + splitPos), Size(_size.x, _size.y - splitPos));
+      leftChild =  new Leaf(Size(_pos.x, _pos.y), Size(_size.x, splitPos));
+      rightChild =  new Leaf(Size(_pos.x, _pos.y + splitPos), Size(_size.x, _size.y - splitPos));
     }
   else
     {
-      leftChild =  new Node(Size(_pos.x, _pos.y), Size(splitPos, _size.y));
-      rightChild =  new Node(Size(_pos.x + splitPos, _pos.y), Size(_size.x - splitPos, _size.y));
+      leftChild =  new Leaf(Size(_pos.x, _pos.y), Size(splitPos, _size.y));
+      rightChild =  new Leaf(Size(_pos.x + splitPos, _pos.y), Size(_size.x - splitPos, _size.y));
     }
   return true;
 }
 
-void	Node::create_rooms(std::vector<Rooms>& _rooms, Size maxS)
+void	Leaf::create_rooms(std::vector<Rooms>& _rooms, Size maxS)
 {
   if (leftChild != NULL || rightChild != NULL)
     {

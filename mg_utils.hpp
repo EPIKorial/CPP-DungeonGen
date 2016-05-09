@@ -5,7 +5,7 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Sat May  7 12:34:34 2016 Korial
-// Last update Sat May  7 20:34:40 2016 Korial
+// Last update Mon May  9 13:14:36 2016 Korial
 //
 
 #ifndef MG_UTILS_HPP_
@@ -47,20 +47,20 @@ public:
   ~Hallways() { }
 };
 
-class Node
+class Leaf
 {
 public:
   Size	_pos;
   Size	_size;
-  Node	*leftChild;
-  Node	*rightChild;
+  Leaf	*leftChild;
+  Leaf	*rightChild;
   
 public:
-  Node(Size pos, Size size) : _pos(pos), _size(size), leftChild(NULL), rightChild(NULL) { }
-  ~Node() { }
+  Leaf(Size pos, Size size) : _pos(pos), _size(size), leftChild(NULL), rightChild(NULL) { }
+  ~Leaf() { }
 
 public:
-  bool	split(Size roomMax, Size roomMin);
+  bool	split(Size roomMin);
   void	create_rooms(std::vector<Rooms>&, Size);
   void	display_node_info() const;
 };
