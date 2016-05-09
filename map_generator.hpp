@@ -5,7 +5,7 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Mon May  2 20:14:23 2016 Korial
-// Last update Mon May  9 18:34:47 2016 Korial
+// Last update Mon May  9 18:40:55 2016 Korial
 //
 
 #ifndef MAP_GENERATOR_HPP_
@@ -46,6 +46,7 @@ private:
   void		draw_hallways();
   void		draw_in_out();
   void		draw_hallways_walls();
+  void		split();
   
 public:
   int				get_room_nbr() const;

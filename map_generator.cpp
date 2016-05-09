@@ -5,7 +5,7 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Wed May  4 12:40:18 2016 Korial
-// Last update Mon May  9 18:33:45 2016 Korial
+// Last update Mon May  9 18:40:42 2016 Korial
 //
 
 #include "map_generator.hpp"
@@ -43,7 +43,6 @@ void				Map::generate_map()
 {
   std::ofstream			debug;
   Leaf				_root = Leaf(Size(0, 0), Size(map_size.x, map_size.y));
-  bool				split = true;
   std::vector<Rooms>		tmpRooms;
 
   if (_seed != -1)
@@ -52,21 +51,7 @@ void				Map::generate_map()
     srand(time(NULL));
   debug.open("map.txt");
   _leafs.push_back(_root);
-  while (split)
-    {
-      split = false;
-      for(size_t i = 0; i < _leafs.size();i++)
-	{
-	  if ((_leafs[i].leftChild == NULL && _leafs[i].rightChild == NULL)
-	      && (_leafs[i]._size.x > room_max_size.x || _leafs[i]._size.y > room_max_size.y)
-	      && (_leafs[i].split(room_min_size)))
-	    {
-	      _leafs.push_back(*_leafs[i].leftChild);
-	      _leafs.push_back(*_leafs[i].rightChild);
-	      split = true;
-	    }
-	}
-    }
+  split();
   for(size_t i = 0; i < _leafs.size();i++)
     _leafs[i].create_rooms(tmpRooms, room_max_size);
   for (int i = 0; i < room_nbr;i++)
@@ -84,6 +69,27 @@ void				Map::generate_map()
   for (size_t i = 0; i < _map.size() ; i++)
     debug << _map[i] << std::endl;
   debug.close();
+}
+
+void	Map::split()
+{
+  bool				split = true;
+
+  while (split)
+    {
+      split = false;
+      for(size_t i = 0; i < _leafs.size();i++)
+	{
+	  if ((_leafs[i].leftChild == NULL && _leafs[i].rightChild == NULL)
+	      && (_leafs[i]._size.x > room_max_size.x || _leafs[i]._size.y > room_max_size.y)
+	      && (_leafs[i].split(room_min_size)))
+	    {
+	      _leafs.push_back(*_leafs[i].leftChild);
+	      _leafs.push_back(*_leafs[i].rightChild);
+	      split = true;
+	    }
+	}
+    }
 }
 
 void	Map::blank_map()
