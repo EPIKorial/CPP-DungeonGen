@@ -5,10 +5,10 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Wed May  4 12:40:18 2016 Korial
-// Last update Mon May  9 18:40:42 2016 Korial
+// Last update Mon May 23 19:47:03 2016 Korial
 //
 
-#include "map_generator.hpp"
+#include "MapGenerator.hpp"
 
 int	Map::get_room_nbr() const
 {
@@ -63,9 +63,11 @@ void				Map::generate_map()
     }
   blank_map();
   draw_rooms();
+  draw_better_walls();
   draw_hallways();
   draw_in_out();
   draw_hallways_walls();
+  draw_angles();
   for (size_t i = 0; i < _map.size() ; i++)
     debug << _map[i] << std::endl;
   debug.close();
@@ -185,11 +187,81 @@ void		Map::draw_hallways_walls()
       for (size_t x = 1;x < _map[i].length()- 1;x++)
 	{
 	  if ((_map[i][x] == '.' && _map[i][x + 1] == ' ')
-	      || (_map[i][x] == '.' && _map[i][x - 1] == ' ')
-	      || (_map[i][x] == '.' && _map[i-1][x] == ' ')
+	      || (_map[i][x] == '.' && _map[i][x - 1] == ' '))
+	    _map[i][x] = '|';
+	  else if ((_map[i][x] == '.' && _map[i-1][x] == ' ')
 	      || (_map[i][x] == '.' && _map[i+1][x] == ' '))
-	    _map[i][x] = 'O';
+	    _map[i][x] = '-';
 	}
     }
 }
 
+void		Map::draw_better_walls()
+{
+  for (size_t i = 1;i < _map.size() - 1;i++)
+    {
+      for (size_t x = 1;x < _map[i].length()- 1;x++)
+	{
+	  if (_map[i][x] == '#' && _map[i][x + 1] == '#' && _map[i + 1][x] == '#')
+	    _map[i][x] = 'X';
+	  else if (_map[i][x] == '#' && _map[i][x - 1] == '-' && _map[i + 1][x] == '#')
+	    _map[i][x] = 'X';
+	  else if ((_map[i][x] == '#' && _map[i][x - 1] == '-' && _map[i - 1][x] == '|')
+		   || (_map[i][x] == '#' && _map[i][x - 1] == 'X' && _map[i - 1][x] == '|')
+		   || (_map[i][x] == '#' && _map[i][x - 1] == '-' && _map[i - 1][x] == 'X'))
+	    _map[i][x] = 'X';
+	  else if (_map[i][x] == '#' && _map[i - 1][x] == '|' && _map[i][x + 1] == '#')
+	    _map[i][x] = 'X';
+	  else if (_map[i][x] == '#' && _map[i][x + 1] == '#')
+	    _map[i][x] = '-';
+	  else if (_map[i][x] == '#' && _map[i + 1][x] == '#')
+	    _map[i][x] = '|';
+	}
+    }
+}
+
+void		Map::draw_angles()
+{
+  for (size_t i = 1;i < _map.size() - 1;i++)
+    {
+      for (size_t x = 1;x < _map[i].length()- 1;x++)
+	{
+	  if (_map[i][x] == '|' && _map[i][x + 1] == 'O')
+	    _map[i][x] = 'X';
+	  else if (_map[i][x] == '|' && _map[i][x - 1] == 'O')
+	    _map[i][x] = 'X';
+	  else if (_map[i][x] == '-' && _map[i + 1][x] == 'O')
+	    _map[i][x] = 'X';
+	  else if (_map[i][x] == '-' && _map[i - 1][x] == 'O')
+	    _map[i][x] = 'X';
+	}
+    }
+  for (size_t i = 1;i < _map.size() - 1;i++)
+    {
+      for (size_t x = 1;x < _map[i].length()- 1;x++)
+  	{
+  	  if (_map[i][x] == '|' && _map[i + 1][x] == ' ')
+  	    _map[i][x] = 'X';
+  	  else if (_map[i][x] == '|' && _map[i - 1][x] == ' ')
+  	    _map[i][x] = 'X';
+  	  else if (_map[i][x] == '-' && _map[i][x + 1] == ' ')
+  	    _map[i][x] = 'X';
+  	  else if (_map[i][x] == '-' && _map[i][x - 1] == ' ')
+  	    _map[i][x] = 'X';
+  	}
+    }
+  for (size_t i = 1;i < _map.size() - 1;i++)
+    {
+      for (size_t x = 1;x < _map[i].length()- 1;x++)
+  	{
+  	  if (_map[i][x] == '.' && _map[i + 1][x] == '|')
+  	    _map[i][x] = 'X';
+  	  else if (_map[i][x] == '.' && _map[i - 1][x] == '|')
+  	    _map[i][x] = 'X';
+  	  else if (_map[i][x] == '.' && _map[i][x + 1] == '-')
+  	    _map[i][x] = 'X';
+  	  else if (_map[i][x] == '.' && _map[i][x - 1] == '-')
+  	    _map[i][x] = 'X';
+  	}
+    }
+}

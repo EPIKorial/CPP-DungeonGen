@@ -5,7 +5,7 @@
 ## Login   <korial@epitech.net>
 ## 
 ## Started on  Tue May 10 19:20:54 2016 Korial
-## Last update Tue May 10 19:23:57 2016 Korial
+## Last update Mon May 23 19:46:47 2016 Korial
 ##
 
 COLOR		= \x1b[32;01m
@@ -18,10 +18,10 @@ CC		= g++
 
 RM		= rm -f
 
-NAME		= map_generator.so
+NAME		= MapGenerator.so
 
-SRC		= src/map_generator.cpp \
-		  src/mg_utils.cpp
+SRC		= src/MapGenerator.cpp \
+		  src/MgUtils.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

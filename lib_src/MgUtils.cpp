@@ -1,14 +1,14 @@
 //
 // mg_utils.cpp for mg_utils in /home/korial/rendu/Tek2/cpp_indie_studio/map_generator
-// 
+//
 // Made by Korial
 // Login   <korial@epitech.net>
-// 
+//
 // Started on  Sat May  7 13:02:21 2016 Korial
-// Last update Mon May  9 15:08:06 2016 Korial
+// Last update Mon May 23 19:47:17 2016 Korial
 //
 
-#include "mg_utils.hpp"
+#include "MgUtils.hpp"
 
 static int	ids = 0;
 

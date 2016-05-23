@@ -5,13 +5,13 @@
 // Login   <korial@epitech.net>
 // 
 // Started on  Mon May  2 20:14:23 2016 Korial
-// Last update Mon May  9 19:13:02 2016 Korial
+// Last update Mon May 23 17:55:52 2016 Korial
 //
 
 #ifndef MAP_GENERATOR_HPP_
 # define MAP_GENERATOR_HPP_
 
-#include "mg_utils.hpp"
+#include "MgUtils.hpp"
 
 #include <iostream>
 #include <vector>
@@ -27,9 +27,11 @@ private:
   Size				room_max_size;
   Size				room_min_size;
   int				_seed;
-  std::vector<std::string>	_map;
   std::vector<Leaf>		_leafs;
   std::vector<Rooms>		_rooms;
+
+public:
+  std::vector<std::string>	_map;
   
 public:
   Map() : room_nbr(1), map_size(Size(100, 100)), room_max_size(Size(10, 10)), room_min_size(Size(6, 6)), _seed(-1) { }
@@ -45,6 +47,8 @@ private:
   void		draw_hallways();
   void		draw_in_out();
   void		draw_hallways_walls();
+  void		draw_better_walls();
+  void		draw_angles();
   void		split();
   
 public:
